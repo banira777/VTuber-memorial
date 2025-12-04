@@ -128,9 +128,9 @@ urls.forEach((url, i) => {
     const screenWidth = window.innerWidth;
     let baseFont = 14; // PCの最小サイズ
     if (screenWidth <= 600) {
-      baseFont = 18;  // スマホでは少し大きく
+      baseFont = 30;  // スマホでは少し大きく
     } else if (screenWidth <= 400) {
-      baseFont = 16;  // 小さいスマホ用
+      baseFont = 20;  // 小さいスマホ用
     }
 
     const w = textWidth(url, fs);
