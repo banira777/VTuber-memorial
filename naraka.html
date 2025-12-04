@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>奈羅花- Memorial</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #A02655; /* ← メンカラー */
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow: hidden;
+  }
+
+  a {
+    position: absolute;
+    font-size: 18px;
+    color:#A02655;
+    text-decoration: none;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    transition: transform .2s, opacity .2s;
+    opacity: 0.9;
+  }
+
+  a:hover {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+/* 画面全体をゆっくり動かすアニメーション */
+body {
+  animation: moveSpace 60s linear infinite alternate;
+}
+
+/* カメラ移動（ズーム＆スライド） */
+@keyframes moveSpace {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-20vw, -20vh) scale(1.2);
+  }
+  100% {
+    transform: translate(-40vw, -10vh) scale(1);
+  }
+}
+body {
+  overflow: scroll;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+/* ▼ ここにURLを好きなだけ入れる（100個近く入ってOK） */
+const urls = [
+"https://pbs.twimg.com/media/G4-f8PQbQAEv3BK?format=jpg&name=large",
+"https://pbs.twimg.com/media/G4VgmqQasAAl3Im?format=jpg&name=large",
+"https://pbs.twimg.com/media/G4VeKVRaQAAyFtP?format=jpg&name=large",
+"https://pbs.twimg.com/media/G3sQ0PHWIAA9nQU?format=jpg&name=large",
+"https://pbs.twimg.com/media/G14LRW7b0AEYC5N?format=jpg&name=large",
+"https://pbs.twimg.com/media/GvUZwB1XkAEcIKe?format=jpg&name=large",
+"https://pbs.twimg.com/media/Gu44Ij3XMAAJgdX?format=jpg&name=large",
+"https://pbs.twimg.com/media/GuzsYd9WoAA-7Cv?format=jpg&name=large",
+"https://pbs.twimg.com/media/GuXsqRFb0AAQKrk?format=jpg&name=large",
+"https://pbs.twimg.com/media/GuUrLP_bcAAobdk?format=jpg&name=large",
+"https://pbs.twimg.com/media/Gt1bR-XW0AANcjy?format=jpg&name=large",
+"https://pbs.twimg.com/media/GtvPSyIXMAAiT5P?format=jpg&name=large",
+"https://pbs.twimg.com/media/GsqipFqaEAANfxi?format=jpg&name=large",
+"https://pbs.twimg.com/media/GsnB6isasAQF_uL?format=jpg&name=large",
+"https://pbs.twimg.com/media/GsBoBYdaAAAxx_C?format=jpg&name=large",
+"https://pbs.twimg.com/media/GsBlY6pbUAADcV5?format=jpg&name=large",
+"https://pbs.twimg.com/media/Go35LABa0AAEtRT?format=jpg&name=large",
+"https://pbs.twimg.com/media/Gohx33GWkAA9H8_?format=jpg&name=large",
+"https://pbs.twimg.com/media/Gn-QaZfbAAAIWqw?format=jpg&name=large",
+"https://pbs.twimg.com/media/GlMvN_1bkAAk7tX?format=jpg&name=large",
+"https://pbs.twimg.com/media/GlCcK5fbIAAWejc?format=jpg&name=large",
+"https://pbs.twimg.com/media/GjkwuiQaUAAUDro?format=jpg&name=large",
+"https://pbs.twimg.com/media/GihullRakAAZWg1?format=jpg&name=large",
+"https://pbs.twimg.com/media/GiY5h7GaMAAjfhc?format=jpg&name=large",
+"https://pbs.twimg.com/media/GiXRkerbYAAoaOz?format=jpg&name=large",
+"https://pbs.twimg.com/media/GiHF7H2bMAAOJYF?format=jpg&name=large",
+"https://pbs.twimg.com/media/Ghrn6uZbUAAuGVY?format=jpg&name=large",
+"https://pbs.twimg.com/media/GhqqFmnaMAAdcYb?format=jpg&name=large",
+"https://pbs.twimg.com/media/Gg6eXR7bwAAZ-a6?format=jpg&name=large",
+"https://pbs.twimg.com/media/Gg51I3iaMAIChK2?format=jpg&name=large",
+"https://pbs.twimg.com/media/Gg1UeKMaMAE8vtH?format=jpg&name=large",
+"https://pbs.twimg.com/media/GY9flnqbAAEJaVz?format=jpg&name=large",
+"https://pbs.twimg.com/media/GYVRwlPXsAAZ9yT?format=jpg&name=large",
+"https://pbs.twimg.com/media/GZBFvUNawAAV-M6?format=jpg&name=large",
+"https://pbs.twimg.com/media/GYZdGRVWgAAZCZF?format=jpg&name=large",
+"https://pbs.twimg.com/media/GWtThhVXYAAaoX2?format=jpg&name=large",
+"https://pbs.twimg.com/media/GUocgwYWIAAtd02?format=jpg&name=large",
+"https://pbs.twimg.com/media/GSILYkbaMAAEjiR?format=jpg&name=large",
+"https://pbs.twimg.com/media/GSILYkbacAAP81s?format=jpg&name=large",
+"https://pbs.twimg.com/media/GSILYkaaIAA1_K6?format=jpg&name=large",
+"https://pbs.twimg.com/media/GO01Nv8aAAAkIJy?format=jpg&name=large",
+"https://pbs.twimg.com/media/GOprxwra4AEoO-9?format=jpg&name=large",
+"https://pbs.twimg.com/media/GL7DIndaQAI7gLA?format=jpg&name=900x900",
+"https://pbs.twimg.com/media/GLS-t_8aoAAafyT?format=jpg&name=large",
+"https://pbs.twimg.com/media/GKUPKGJb0AAeUhK?format=jpg&name=large",
+"https://pbs.twimg.com/media/GIKPCZUaQAEt7VB?format=jpg&name=4096x4096",
+"https://pbs.twimg.com/media/GHlcIkRb0AEzywg?format=jpg&name=large",
+"https://pbs.twimg.com/media/GHgL21vbEAAifMg?format=jpg&name=large",
+"https://pbs.twimg.com/media/GDWiaS6asAExVtu?format=jpg&name=large",
+"https://pbs.twimg.com/media/GC_HUHaaYAASdzz?format=jpg&name=large",
+"https://pbs.twimg.com/media/GC6Jqb_aIAAeWyg?format=jpg&name=large",
+"https://pbs.twimg.com/media/GCmArtcaAAAYqQu?format=jpg&name=large",
+"https://pbs.twimg.com/media/GAgXVwaboAAEegi?format=jpg&name=large",
+"https://pbs.twimg.com/media/F_i__aMasAAxXVw?format=jpg&name=large",
+"https://pbs.twimg.com/media/F-8i9QTbwAARCOr?format=jpg&name=medium",
+"https://pbs.twimg.com/media/F-U7MkwaIAAP7WZ?format=jpg&name=large",
+"https://pbs.twimg.com/media/F-QnChLbcAA2gA3?format=jpg&name=large",
+"https://pbs.twimg.com/media/F7MC49ia8AAO9LZ?format=jpg&name=large",
+"https://pbs.twimg.com/media/F3-jPcZaQAE3Qd3?format=jpg&name=large",
+"https://pbs.twimg.com/media/F3-h9y3aYAAzCLn?format=jpg&name=large",
+"https://pbs.twimg.com/media/FxEdOuPaUAAPBcO?format=jpg&name=large",
+"https://pbs.twimg.com/media/FujbFD3aEAIJ5cd?format=jpg&name=large",
+"https://pbs.twimg.com/media/FuZdRGnacAADDBY?format=jpg&name=large",
+"https://pbs.twimg.com/media/FuWcD_taQAAhAan?format=jpg&name=large",
+"https://yt3.googleusercontent.com/4BTDvlYMdwZwowQvrh0s9UlLNwDI_v_pOH0eVvZbpmEbkcVoIh1wzlqN8WFcfRWHR-lFnOJA=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+"http://www.youtube.com/@Naraka_nijisanji",
+"https://pbs.twimg.com/media/EM9eOcKUYAEqJMS?format=jpg&name=medium",
+"https://pbs.twimg.com/media/EqPsauaU8AAYsB7?format=jpg&name=large",
+"https://pbs.twimg.com/media/EqPsauoUcAM-qCe?format=jpg&name=large",
+"https://pbs.twimg.com/media/EqPsayAVoAAnVCq?format=jpg&name=large",
+"https://pbs.twimg.com/media/EqPsbQmVQAAUoRf?format=jpg&name=large",
+"https://pbs.twimg.com/media/FKwUlEwaIAIaAeE?format=jpg&name=large",
+"https://pbs.twimg.com/media/FKwUlEyacAA5SXD?format=jpg&name=large",
+"https://pbs.twimg.com/media/FKwUlHAaIAElsoo?format=jpg&name=large",
+"https://pbs.twimg.com/media/FKwUlKtaUAAJRvH?format=jpg&name=large",
+"https://pbs.twimg.com/media/FgZv_PsaAAAUL9L?format=jpg&name=medium",
+"https://pbs.twimg.com/media/FgZv_PqaYAADNeo?format=jpg&name=medium",
+"https://pbs.twimg.com/media/FgZv_PpagAA1v7-?format=jpg&name=large",
+"https://pbs.twimg.com/media/FgZv_PlaEAEQyZr?format=jpg&name=large",
+"https://pbs.twimg.com/media/FlYUUyTaYAAKvlp?format=jpg&name=large",
+"https://pbs.twimg.com/media/FlYUUyXakAA8GV5?format=jpg&name=large",
+"https://pbs.twimg.com/media/FlYUUyRacAQpPtD?format=jpg&name=large",
+"https://pbs.twimg.com/media/FlYUUyUacAIFUwg?format=jpg&name=large",
+
+
+];
+
+
+// ★ 広い空間（これを大きくするともっと宇宙になる）
+const WORLD_WIDTH = 250;   // 250vw
+const WORLD_HEIGHT = 250;  // 250vh
+
+const placed = [];
+
+// テキスト幅の推定
+function textWidth(text, fontSize) {
+  return text.length * fontSize * 0.6;
+}
+
+// 衝突しない位置
+function getFreePos(w, h) {
+  let tries = 0;
+
+  while (tries < 1200) {
+    const x = Math.random() * WORLD_WIDTH;
+    const y = Math.random() * WORLD_HEIGHT;
+
+    let bad = false;
+
+    for (let p of placed) {
+      const dx = Math.abs(p.x - x);
+      const dy = Math.abs(p.y - y);
+      if (dx < (p.w + w) && dy < (p.h + h)) {
+        bad = true;
+        break;
+      }
+    }
+
+    if (!bad) {
+      placed.push({ x, y, w, h });
+      return { x, y };
+    }
+
+    tries++;
+  }
+
+  return { x: Math.random() * WORLD_WIDTH, y: Math.random() * WORLD_HEIGHT };
+}
+
+
+// ================================
+// URLを1つずつフェードイン表示
+// ================================
+urls.forEach((url, i) => {
+
+  setTimeout(() => {
+    const el = document.createElement("a");
+    el.textContent = url;
+    el.href = url;
+    el.target = "_blank";
+
+    const fs = 14 + Math.random()*12;
+    el.style.fontSize = fs + "px";
+
+    const w = textWidth(url, fs);
+    const h = fs * 1.4;
+
+    const pos = getFreePos(w, h);
+    el.style.left = pos.x + "vw";
+    el.style.top  = pos.y + "vh";
+
+    document.body.appendChild(el);
+
+    requestAnimationFrame(() => {
+      el.style.opacity = "1";
+    });
+
+  }, i * 5);
+
+});
+</script>
+
+</body>
+</html>

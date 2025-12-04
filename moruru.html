@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>闇夜乃モルル - Memorial</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #EC4676; /* ← メンカラー */
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow: hidden;
+  }
+
+  a {
+    position: absolute;
+    font-size: 18px;
+    color: #EC4676;
+    text-decoration: none;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    transition: transform .2s, opacity .2s;
+    opacity: 0.9;
+  }
+
+  a:hover {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+/* 画面全体をゆっくり動かすアニメーション */
+body {
+  animation: moveSpace 60s linear infinite alternate;
+}
+
+/* カメラ移動（ズーム＆スライド） */
+@keyframes moveSpace {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-20vw, -20vh) scale(1.2);
+  }
+  100% {
+    transform: translate(-40vw, -10vh) scale(1);
+  }
+}
+body {
+  overflow: scroll;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+/* ▼ ここにURLを好きなだけ入れる（100個近く入ってOK） */
+const urls = [
+"https://x.com/_rnrrdark/status/1143124540349747202?s=20",
+"https://x.com/_rnrrdark/status/1141092292373053442?s=20",
+"https://x.com/_rnrrdark/status/1140622411366146048?s=20",
+"https://x.com/_rnrrdark/status/1138441683048157184?s=20",
+"https://x.com/_rnrrdark/status/1138404116818874370?s=20",
+"https://x.com/_rnrrdark/status/1138069869386059776?s=20",
+"https://x.com/_rnrrdark/status/1133715198601072640?s=20",
+"https://x.com/_rnrrdark/status/1130760782034030592?s=20",
+"https://x.com/_rnrrdark/status/1127329248115453952?s=20",
+"https://x.com/_rnrrdark/status/1125348260384690177?s=20",
+"https://x.com/_rnrrdark/status/1124375357774106624?s=20",
+"https://x.com/_rnrrdark/status/1123260938532999173?s=20",
+"https://x.com/_rnrrdark/status/1123063150683668485?s=20",
+"https://x.com/_rnrrdark/status/1122191958405857281?s=20",
+"https://x.com/_rnrrdark/status/1121736013292769281?s=20",
+"https://x.com/_rnrrdark/status/1121420184735010816?s=20",
+"https://x.com/_rnrrdark/status/1121381943478591495?s=20",
+"https://x.com/_rnrrdark/status/1121055217238155264?s=20",
+"https://x.com/_rnrrdark/status/1120721974118891521?s=20",
+"https://x.com/_rnrrdark/status/1120447516581953537?s=20",
+"https://x.com/_rnrrdark/status/1120346078761455616?s=20",
+"https://x.com/_rnrrdark/status/1120088240667541510?s=20",
+"https://x.com/_rnrrdark/status/1119881063713521664?s=20",
+"https://x.com/_rnrrdark/status/1118519142116499456?s=20",
+"https://x.com/_rnrrdark/status/1118181161111474176?s=20",
+"https://x.com/_rnrrdark/status/1116606832204664833?s=20",
+"https://x.com/_rnrrdark/status/1113671702511112193?s=20",
+"https://x.com/_rnrrdark/status/1105807217393979392?s=20",
+"https://x.com/_rnrrdark/status/1105393711557406721?s=20",
+"https://x.com/_rnrrdark/status/1102894930572148736?s=20",
+"https://x.com/_rnrrdark/status/1102584869874425858?s=20",
+"https://x.com/_rnrrdark/status/1097881828654895104?s=20",
+"https://x.com/_rnrrdark/status/1096784289302081536?s=20",
+"https://x.com/_rnrrdark/status/1092775715550810112?s=20",
+"https://x.com/_rnrrdark/status/1092056705788071936?s=20",
+"https://x.com/_rnrrdark/status/1091735597197123584?s=20",
+"https://x.com/_rnrrdark/status/1091603102589804545?s=20",
+"https://x.com/_rnrrdark/status/1090538810927009792?s=20",
+"https://x.com/_rnrrdark/status/1089250276479922176?s=20",
+"https://x.com/_rnrrdark/status/1087954625557348354?s=20",
+"https://x.com/_rnrrdark/status/1087533148676616193?s=20",
+"https://x.com/_rnrrdark/status/1084735299597479936?s=20",
+"https://x.com/_rnrrdark/status/1084610790437474304?s=20",
+"https://x.com/_rnrrdark/status/1084109528151384064?s=20",
+"https://x.com/_rnrrdark/status/1083631034472620032?s=20",
+"https://x.com/_rnrrdark/status/1083546804594008064?s=20",
+"https://x.com/_rnrrdark/status/1083278967740592128?s=20",
+"https://x.com/_rnrrdark/status/1082756201941626880?s=20",
+"https://x.com/_rnrrdark/status/1080650575648239616?s=20",
+"https://x.com/_rnrrdark/status/1079774477485891584?s=20",
+"https://x.com/_rnrrdark/status/1079666393572765696?s=20",
+"https://x.com/_rnrrdark/status/1079321495547990016?s=20",
+"https://x.com/_rnrrdark/status/1078162066781786112?s=20",
+"https://x.com/_rnrrdark/status/1077539105414688769?s=20",
+"https://x.com/_rnrrdark/status/1077231472149295105?s=20",
+"https://x.com/_rnrrdark/status/1077205419255246850?s=20",
+"https://x.com/_rnrrdark/status/1073176049599401984?s=20",
+"https://x.com/_rnrrdark/status/1067621104292782081?s=20",
+"https://x.com/_rnrrdark/status/1066324802619682816?s=20",
+"https://x.com/_rnrrdark/status/1063689345184391169?s=20",
+"https://x.com/_rnrrdark/status/1046673419440250880?s=20",
+"https://x.com/_rnrrdark/status/1046334204030545920?s=20",
+"https://x.com/_rnrrdark/status/1045992605325045762?s=20",
+"https://x.com/_rnrrdark/status/1045861454644051968?s=20",
+"https://x.com/_rnrrdark/status/1045704927555641344?s=20",
+"https://x.com/_rnrrdark/status/1044977258702630912?s=20",
+"https://x.com/_rnrrdark/status/1044709783276683264?s=20",
+"https://x.com/_rnrrdark/status/1043430288955662336?s=20",
+"https://x.com/_rnrrdark/status/1042593102731468800?s=20",
+"https://x.com/_rnrrdark/status/1042138905795997696?s=20",
+"https://x.com/_rnrrdark/status/1041503701284737024?s=20",
+"https://x.com/_rnrrdark/status/1039849322903363585?s=20",
+"https://x.com/_rnrrdark/status/1039883061498851328?s=20",
+"https://x.com/_rnrrdark/status/1039075469121867776?s=20",
+"https://x.com/_rnrrdark/status/1038064907789393927?s=20",
+"https://x.com/_rnrrdark/status/1036550550584619008?s=20",
+"https://x.com/_rnrrdark/status/1035916883029966853?s=20",
+"https://x.com/_rnrrdark/status/1035783252697440256?s=20",
+"https://x.com/_rnrrdark/status/1033766659591352321?s=20",
+"https://x.com/_rnrrdark/status/1032988540978716672?s=20",
+"https://x.com/_rnrrdark/status/1032651309613109248?s=20",
+"https://x.com/_rnrrdark/status/1030733854145830912?s=20",
+"https://x.com/_rnrrdark/status/1030106283683147776?s=20",
+"https://x.com/_rnrrdark/status/1028075440290689024?s=20",
+"https://x.com/_rnrrdark/status/1027946523412156416?s=20",
+"https://x.com/_rnrrdark/status/1027433989609406464?s=20",
+"https://x.com/_rnrrdark/status/1026844971242930178?s=20",
+"https://x.com/_rnrrdark/status/1026393078943248389?s=20",
+"https://x.com/_rnrrdark/status/1025171460375998464?s=20",
+"https://x.com/_rnrrdark/status/1025051289544097792?s=20",
+"https://x.com/_rnrrdark/status/1022761835253006336?s=20",
+"https://x.com/_rnrrdark/status/1018868417003048961?s=20",
+"https://x.com/_rnrrdark/status/1018768419942907904?s=20",
+"https://x.com/_rnrrdark/status/1015542414440742912?s=20",
+
+
+  
+];
+
+
+// ★ 広い空間（これを大きくするともっと宇宙になる）
+const WORLD_WIDTH = 250;   // 250vw
+const WORLD_HEIGHT = 250;  // 250vh
+
+const placed = [];
+
+// テキスト幅の推定
+function textWidth(text, fontSize) {
+  return text.length * fontSize * 0.6;
+}
+
+// 衝突しない位置
+function getFreePos(w, h) {
+  let tries = 0;
+
+  while (tries < 1200) {
+    const x = Math.random() * WORLD_WIDTH;
+    const y = Math.random() * WORLD_HEIGHT;
+
+    let bad = false;
+
+    for (let p of placed) {
+      const dx = Math.abs(p.x - x);
+      const dy = Math.abs(p.y - y);
+      if (dx < (p.w + w) && dy < (p.h + h)) {
+        bad = true;
+        break;
+      }
+    }
+
+    if (!bad) {
+      placed.push({ x, y, w, h });
+      return { x, y };
+    }
+
+    tries++;
+  }
+
+  return { x: Math.random() * WORLD_WIDTH, y: Math.random() * WORLD_HEIGHT };
+}
+
+
+// ================================
+// URLを1つずつフェードイン表示
+// ================================
+urls.forEach((url, i) => {
+
+  setTimeout(() => {
+    const el = document.createElement("a");
+    el.textContent = url;
+    el.href = url;
+    el.target = "_blank";
+
+    const fs = 14 + Math.random()*12;
+    el.style.fontSize = fs + "px";
+
+    const w = textWidth(url, fs);
+    const h = fs * 1.4;
+
+    const pos = getFreePos(w, h);
+    el.style.left = pos.x + "vw";
+    el.style.top  = pos.y + "vh";
+
+    document.body.appendChild(el);
+
+    requestAnimationFrame(() => {
+      el.style.opacity = "1";
+    });
+
+  }, i * 5);
+
+});
+</script>
+
+</body>
+</html>
