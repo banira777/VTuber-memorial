@@ -68,6 +68,18 @@ overflow:auto;}
     transform: translate(-50%, -50%) scale(1.25);
     filter: drop-shadow(0 0 18px rgba(155,200,255,0.25));
   }
+@media (max-width: 600px) {
+  .monument {
+    width: 60px;
+    height: 60px;
+  }
+  .emoji {
+    font-size: 20px;
+  }
+  .name span {
+    font-size: 11px;
+  }
+}
 
   /* 絵文字 */
   .emoji {
@@ -168,6 +180,7 @@ overflow:auto;}
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;     
   z-index: 9999;
   animation: fadeIn 0.4s ease;
 }
@@ -178,6 +191,8 @@ overflow:auto;}
   padding: 28px 32px;
   border-radius: 14px;
   max-width: 520px;
+   width: 90%;              /* ← スマホで画面幅に合わせる */
+  box-sizing: border-box;  /* ← はみ出し防止 */
   text-align: center;
   box-shadow: 0 0 20px rgba(255,255,255,0.2);
   animation: scaleIn 0.4s ease;
@@ -209,6 +224,24 @@ overflow:auto;}
 @keyframes scaleIn {
   from { transform: scale(0.8); opacity: 0; }
   to   { transform: scale(1);   opacity: 1; }
+}
+@media (max-width: 600px) {
+  .popup-box {
+    padding: 20px 18px;
+  }
+  .popup-box h2 {
+    font-size: 20px;
+  }
+  .popup-box .subtitle {
+    font-size: 15px;
+  }
+  .popup-box p {
+    font-size: 14px;
+  }
+  #closePopup {
+    font-size: 15px;
+    padding: 8px 18px;
+  }
 }
 
 </style>
