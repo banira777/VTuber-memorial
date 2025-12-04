@@ -136,6 +136,14 @@ urls.forEach((url, i) => {
     el.href = url;
     el.target = "_blank";
 
+    // 画面幅に応じて文字サイズを変える
+    const screenWidth = window.innerWidth;
+    let baseFont = 14; // PCの最小サイズ
+    if (screenWidth <= 600) {
+      baseFont = 30;  // スマホでは少し大きく
+    } else if (screenWidth <= 400) {
+      baseFont = 20;  // 小さいスマホ用
+    }
     const fs = 14 + Math.random()*12;
     el.style.fontSize = fs + "px";
 
