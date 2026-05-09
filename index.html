@@ -254,7 +254,7 @@ overflow:auto;}
     <h2>VTuber Memorial</h2>
 <h3 class="subtitle">〜 インターネット保存 〜</h3>
     <p>
-      このサイトは、卒業した後にそのまま放置されるように残されていたり、消されてしまうVTuberの体を一つの場所に保存し保管したいいう作者の考えのもとで作られています。そして、ここには作者が卒業したにじさんじのVTuberたちの本当の身体があると判断したものだけが集められ、保管されています。<br><br>
+      このサイトは、卒業した後にそのまま放置されるように残されていたり、消されてしまうVTuberの体を一つの場所に保存し保管したいいう作者の考えのもとで作られています。そして、ここには作者が卒業したVTuberたちの体があると判断したものだけが集められ、保管されています。<br><br>
      作者が言う本当の身体とは：VTuber本人が写真や動画を撮りそれを自分でインターネットに挙げる際、画面上に写っているVTuberの体と、VTuberの中の人の体が対照的な存在となる。その時に VTuberだけの身体が生まれると作者は考え、それをVTuberの本当の身体としている。<br><br>
                本当の身体の条件：・本人が投稿している写真や動画であること<br>
                               ・必ず本人の立ち絵、３Dの体であること（ファンアートやキービジュアルは除外）又はXのアカウントやYouTubeのチャンネルが本人のものだとわかる画像<br>
@@ -329,20 +329,68 @@ for (let i = 0; i < monuments.length; i++) {
 
 positions.sort(() => Math.random() - 0.5);
 
-// ====== ③ 光（2時間残る） ======
+// ====== ③ 花＋光 ======
 function dropGlow(target) {
+
+  // ===== 光 =====
   const glow = document.createElement("div");
   glow.className = "glow-ring";
 
   target.appendChild(glow);
 
-  // ふわっと出現
-  setTimeout(() => glow.classList.add("show"), 10);
+  setTimeout(() => {
+    glow.classList.add("show");
+  }, 10);
 
-  // 2時間で消える（元の仕様のまま）
-  setTimeout(() => glow.remove(), 2 * 60 * 60 * 1000);
-}
+  // ===== 花 =====
+  const flowerList = [
+    "1f338", // 🌸
+    "1f33c", // 🏵️
+    "1f339", // 🌹
+    "1f940", // 🌻
+    "1fabb"  // 🪻
+  ];
 
+  const randomFlower =
+    flowerList[Math.floor(Math.random() * flowerList.length)];
+
+  const flower = document.createElement("img");
+
+  flower.src =
+    `https://fonts.gstatic.com/s/e/notoemoji/latest/${randomFlower}/emoji.svg`;
+
+  flower.className = "flower";
+
+  // monument中心
+  const centerX = 40;
+  const centerY = 40;
+
+  // ランダム角度
+  const angle = Math.random() * Math.PI * 2;
+
+  // 半径
+  const radius = 55 + Math.random() * 20;
+
+  // 位置
+  const x = centerX + Math.cos(angle) * radius;
+  const y = centerY + Math.sin(angle) * radius;
+
+  flower.style.left = x + "px";
+  flower.style.top = y + "px";
+
+  target.appendChild(flower);
+
+  setTimeout(() => {
+    flower.classList.add("show");
+  }, 10);
+
+  // ===== 2時間後に消える =====
+  setTimeout(() => {
+
+    glow.remove();
+    flower.remove();
+
+  }, 2 * 60 * 60 * 1000);
 // ====== ④ monument生成 ======
 positions.forEach((pos, i) => {
   const m = monuments[i];
