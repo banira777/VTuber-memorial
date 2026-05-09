@@ -186,21 +186,29 @@ overflow:auto;}
 }
 
 .popup-box {
-  background: #ffffff;
+ .popup-box {
+  background: rgba(255,255,255,0.96);
   color: #222;
-  padding: 28px 32px;
-  border-radius: 14px;
-  max-width: 520px;
-   width: 90%;              /* ← スマホで画面幅に合わせる */
-   max-height: 80vh;      /* 画面の高さの80%までに制限 */
-  overflow-y: auto;      /* 内容がはみ出したらスクロール可能に */
-  box-sizing: border-box;  /* ← はみ出し防止 */
-  text-align: center;
-  box-shadow: 0 0 20px rgba(255,255,255,0.2);
-  animation: scaleIn 0.4s ease;
-  line-height: 1.7;
-}
 
+  width: min(92vw, 900px);
+  max-height: 88vh;
+
+  padding: 40px;
+  border-radius: 18px;
+
+  overflow-y: auto;
+
+  text-align: center;
+  line-height: 2;
+
+  box-shadow: 0 0 40px rgba(255,255,255,0.15);
+
+  animation: scaleIn 0.4s ease;
+
+  max-width: 700px;
+  margin: 0 auto 28px;
+
+}
 #closePopup {
   margin-top: 16px;
   padding: 8px 22px;
@@ -213,9 +221,10 @@ overflow:auto;}
   transition: 0.2s;
 }
 
-#closePopup:hover {
-  transform: scale(1.05);
-  background: #c6f2ff;
+
+#closePopup{
+  display:block;
+  margin:40px auto 0;
 }
 
 @keyframes fadeIn {
@@ -226,24 +235,6 @@ overflow:auto;}
 @keyframes scaleIn {
   from { transform: scale(0.8); opacity: 0; }
   to   { transform: scale(1);   opacity: 1; }
-}
-@media (max-width: 600px) {
-  .popup-box {
-    padding: 20px 18px;
-  }
-  .popup-box h2 {
-    font-size: 20px;
-  }
-  .popup-box .subtitle {
-    font-size: 15px;
-  }
-  .popup-box p {
-    font-size: 14px;
-  }
-  #closePopup {
-    font-size: 15px;
-    padding: 8px 18px;
-  }
 }
 
 </style>
@@ -289,11 +280,8 @@ VTuberだけの身体が現れる瞬間だと考えている。
 このような考えから、当サイトは、卒業や引退によって使われなくなったインターネット上に残されているVtuberの身体（Vtuberだけの身体）を保管・保存する目的として作られている。
 </h2>
 
-</div>
-
-<button id="closePopup">ENTER</button>
-
-</div>
+ <button id="closePopup">OK</button>
+ </div>
 </div>
 
 <div id="sky"></div>
