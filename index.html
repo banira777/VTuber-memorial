@@ -68,18 +68,6 @@ overflow:auto;}
     transform: translate(-50%, -50%) scale(1.25);
     filter: drop-shadow(0 0 18px rgba(155,200,255,0.25));
   }
-@media (max-width: 600px) {
-  .monument {
-    width: 60px;
-    height: 60px;
-  }
-  .emoji {
-    font-size: 20px;
-  }
-  .name span {
-    font-size: 11px;
-  }
-}
 
   /* 絵文字 */
   .emoji {
@@ -88,6 +76,7 @@ overflow:auto;}
     pointer-events:none;
     user-select:none;
   }
+/* 花アイコン（訪問記録） */ .flower { filter: drop-shadow(0 0 6px rgba(255,180,220,0.9)); transform: translate(-50%, -60%) scale(1.35); z-index: 5; position:absolute; width:40px;height:40px;transform:translate(-50%,-20%);pointer-events:none;opacity:0;transition:opacity .4s; z-index:1; } .flower.show{opacity:1;transform:translate(-50%,-50%) scale(1);}
 
   /* 名前の光刻印 */
   .name {
@@ -180,13 +169,11 @@ overflow:auto;}
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;     
   z-index: 9999;
   animation: fadeIn 0.4s ease;
 }
 
-
- .popup-box {
+.popup-box {
   background: rgba(255,255,255,0.96);
   color: #222;
 
@@ -209,6 +196,7 @@ overflow:auto;}
   margin: 0 auto 28px;
 
 }
+
 #closePopup {
   margin-top: 16px;
   padding: 8px 22px;
@@ -220,7 +208,6 @@ overflow:auto;}
   font-size: 16px;
   transition: 0.2s;
 }
-
 
 #closePopup{
   display:block;
@@ -237,53 +224,56 @@ overflow:auto;}
   to   { transform: scale(1);   opacity: 1; }
 }
 
+
 </style>
 </head>
 <body>
 <div id="introPopup">
   <div class="popup-box">
+
     <h2>VTuber Memorial</h2>
-<h3 class="subtitle">〜 インターネット保存 〜</h3>
-   <p>
+    <h3 class="subtitle">〜 インターネット保存 〜</h3>
+
+    <p>
 VTuberとは、バーチャルYouTuberの略であり、
 画面上のキャラクターのアバターを通して活動する配信者のことである。
-</p>
+    </p>
 
-<p>
+    <p>
 VTuberは、現実の人と架空の姿が
 重なり合う形で存在している。
-</p>
+    </p>
 
-<h2>VTuberだけの身体</h2>
+    <h2>VTuberだけの身体</h2>
 
-<p>
+    <p>
 作者は、VTuberの構造の中には、
 配信者とアバターが乖離して存在する瞬間があると考えている。
-</p>
+    </p>
 
-<p>
+    <p>
 それは、VTuber本人が
 アバターの自撮りや動画を撮影している瞬間である。
-</p>
+    </p>
 
-<p>
+    <p>
 その瞬間にだけ、画面の中のアバターと、
 画面の外の配信者は向き合って存在している。
-</p>
+    </p>
 
-<p>
+    <p>
 作者はこの状態を、
 VTuberだけの身体が現れる瞬間だと考えている。
-</p>
+    </p>
 
-<h2>
+    <p class="small">
 このような考えから、当サイトは、卒業や引退によって使われなくなったインターネット上に残されているVtuberの身体（Vtuberだけの身体）を保管・保存する目的として作られている。
-</h2>
+    </p>
 
     <button id="closePopup">OK</button>
+
   </div>
 </div>
-
 <div id="sky"></div>
 
 <div id="ui" style="position:fixed;left:16px;bottom:16px;font-size:13px;background:rgba(0,0,0,0.3);padding:10px 12px;border-radius:8px;">
@@ -346,7 +336,7 @@ for (let i = 0; i < monuments.length; i++) {
 
 positions.sort(() => Math.random() - 0.5);
 
-/ ====== ③ 花＋光 ======
+// ====== ③ 花＋光 ======
 function dropGlow(target) {
 
   // ===== 光 =====
