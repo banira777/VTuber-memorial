@@ -281,7 +281,30 @@ VTuberだけの身体が現れる瞬間だと考えている。
 ・クリックで花が添えられます（2時間残る）
 </div>
 
-<script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAZisCtajgbDPr0OrZ-CVIfWvwElMvnyIY",
+  authDomain: "vtuber-d350e.firebaseapp.com",
+  projectId: "vtuber-d350e",
+  storageBucket: "vtuber-d350e.firebasestorage.app",
+  messagingSenderId: "982726048909",
+  appId: "1:982726048909:web:779c788def492ba28f76c4"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
 
 
 // ====== ① データだけ書く部分 ======
@@ -319,7 +342,7 @@ const monuments = [
 
 
 // ====== ② グリッド座標を作る ======
-const COLS = 4;
+const COLS = window.innerWidth < 768 ? 3 : 4;
 const ROWS = Math.ceil(monuments.length / COLS);
 
 const positions = [];
@@ -413,15 +436,49 @@ positions.forEach((pos, i) => {
     <div class="name"><span class="glow">${m.name}</span></div>
   `;
 
-  el.addEventListener("click", (e) => {
-    e.stopPropagation();
-    window.open(m.link, "_blank");
-    dropGlow(el);
+ el.addEventListener("click", async (e) => {
+  e.stopPropagation();
+
+  // ページを開く
+  window.open(m.link, "_blank");
+
+ 
+
+  // Firebaseに保存
+  await addDoc(collection(db, "flowers"), {
+    monumentId: m.id,
+    time: Date.now()
+  });
+});
+document.querySelector("#sky").appendChild(el);
+
+}); // ← positions.forEach を閉じる
+// ===== Firebaseから花を読む =====
+onSnapshot(collection(db, "flowers"), (snapshot) => {
+
+  snapshot.docChanges().forEach((change) => {
+
+    const data = change.doc.data();
+
+    // 2時間以内だけ表示
+    if (Date.now() - data.time > 2 * 60 * 60 * 1000) return;
+
+    // monument探す
+    const monumentEls = document.querySelectorAll(".monument");
+
+    monumentEls.forEach((el, index) => {
+
+      if (monuments[index].id === data.monumentId) {
+
+        dropGlow(el);
+
+
+      }
+
+    });
   });
 
-  document.querySelector("#sky").appendChild(el);
 });
-
 // ===== 横流れの星（ゆっくり）を追加 =====
 function createHorizontalStar() {
   const star = document.createElement("div");
